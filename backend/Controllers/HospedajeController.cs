@@ -13,7 +13,7 @@ namespace backend.Controllers
     [ApiController]
     public class HospedajeController : ControllerBase
     {
-        private static Hospedaje[] Hospedajes = Enumerable.Range(1, 2).Select(index => new Hospedaje
+        private static Hospedaje[] Hospedajes = Enumerable.Range(1, 20).Select(index => new Hospedaje
         {
             Id = index,
             Titulo = "Hospedaje de ejemplo " + index,
@@ -48,6 +48,8 @@ namespace backend.Controllers
         [HttpPost]
         public void Post([FromBody] Hospedaje hospedaje)
         {
+            //Solo para ver el numero. Error al eliminar
+            hospedaje.Id = Hospedajes.Count() + 1;
             Hospedajes = Hospedajes.Append(hospedaje).ToArray();
         }
 
