@@ -1,6 +1,6 @@
 const btnEnviar = document.getElementById('btnEnviar');
 
-
+const btnEliminar = document.getElementById('btnDelete');
 
 btnEnviar.addEventListener('click', () => {
     let titulo = document.getElementById('titulo').value;
@@ -21,4 +21,34 @@ btnEnviar.addEventListener('click', () => {
         }
     ).catch((err => console.log(err)))
 });
+
+btnEliminar.addEventListener('click', () => {
+    let id = document.getElementById('identificador').value;
+    axios({
+        method: 'delete',
+        url: 'https://localhost:44389/api/hospedaje/'+ id
+    }).then(
+        (res) => {
+            console.log(res.data)
+        }
+    ).catch((err => console.log(err)))
+});
+
+function getData(){
+    axios({
+        method: 'GET',
+        url: 'https://localhost:44389/api/hospedaje'
+    }).then(res => {
+        const list = document.getElementById('list')
+        const fragment = document.createDocumentFragment()
+        for (const userInfo of res.data) {
+            const listItem = document.createElement('LI')
+            listItem.textContent = `${userInfo.id} - ${userInfo.titulo}`
+            fragment.appendChild(listItem)
+        }
+        list.appendChild(fragment)
+    }).catch(err => console.log(err))
+}
+
+document.addEventListener('DOMContentLoaded', getData, false)
 
