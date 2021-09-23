@@ -15,7 +15,13 @@
   </head>
 
   <body>
-    <main class="container">
+    <main class="container mt-5">
+      <a
+        class="btn btn-outline-primary float-right"
+        href="./hospedajes.html"
+        role="button"
+        >Mis habitaciones</a
+      >
       <h2>Nuevo hospedaje</h2>
       <form>
         <div class="form-group">
@@ -30,25 +36,38 @@
           <label for="titulo">Direccion</label>
           <input type="text" class="form-control" id="direccion" />
         </div>
-        <button type="submit" class="btn btn-primary" id="btnEnviar">
-          Submit
+        <fieldset class="form-group row">
+          <legend class="col-form-label col-sm-2 float-sm-left pt-0">Servicios:</legend>
+          <div class="col-sm-10">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="gridRadios" id="gridRadios1" value="option1" checked>
+              <label class="form-check-label" for="gridRadios1">
+                Wifi
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="gridRadios" id="gridRadios2" value="option2">
+              <label class="form-check-label" for="gridRadios2">
+                Television
+              </label>
+            </div>
+          </div>
+        </fieldset>
+        <button class="btn btn-primary" id="btnEnviar" type="submit">
+          Enviar
         </button>
       </form>
 
-      <h2>Eliminar hospedaje</h2>
+      <h2 class="mt-5">Eliminar hospedaje</h2>
       <form>
         <div class="form-group">
           <label for="titulo">id</label>
           <input type="number" class="form-control" id="identificador" />
         </div>
-        <button type="submit" class="btn btn-primary" id="btnDelete">
+        <button id="btnDelete" type="submit" class="btn btn-primary">
           Eliminar
         </button>
       </form>
-
-      <div>
-        <ul id="list"></ul>
-      </div>
     </main>
 
     <script

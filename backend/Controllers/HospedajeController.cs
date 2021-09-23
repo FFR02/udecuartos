@@ -13,7 +13,7 @@ namespace backend.Controllers
     [ApiController]
     public class HospedajeController : ControllerBase
     {
-        private static Hospedaje[] Hospedajes = Enumerable.Range(1, 20).Select(index => new Hospedaje
+        private static Hospedaje[] Hospedajes = Enumerable.Range(1, 5).Select(index => new Hospedaje
         {
             Id = index,
             Titulo = "Hospedaje de ejemplo " + index,
