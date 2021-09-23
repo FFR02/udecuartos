@@ -48,6 +48,7 @@ namespace backend.Controllers
         [HttpPost]
         public void Post([FromBody] Hospedaje hospedaje)
         {
+            hospedaje.Id = 13;
             Hospedajes = Hospedajes.Append(hospedaje).ToArray();
         }
 
