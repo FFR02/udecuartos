@@ -1,24 +1,4 @@
-function getData() {
-    axios({
-        method: 'GET',
-        url: 'https://localhost:44389/api/hospedaje'
-    }).then(res => {
-        const list = document.getElementById('list')
-        const fragment = document.createDocumentFragment()
-        for (const userInfo of res.data) {
-            const listItem = document.createElement('LI')
-            listItem.className = "list-group-item";
-            listItem.textContent = `${userInfo.id} - ${userInfo.titulo}`
-            fragment.appendChild(listItem)
-        }
-        list.appendChild(fragment)
-    }).catch(err => console.log(err))
-}
-
-document.addEventListener('DOMContentLoaded', getData, false);
-
 const btnEnviar = document.getElementById('btnEnviar');
-
 const btnEliminar = document.getElementById('btnDelete');
 
 btnEnviar.addEventListener('click', () => {
@@ -28,7 +8,7 @@ btnEnviar.addEventListener('click', () => {
 
     axios({
         method: 'post',
-        url: 'https://localhost:44389/api/hospedaje',
+        url: 'https://localhost:44389/api/hospedaje/',
         data: {
             'titulo': titulo,
             'tipo': tipo,
@@ -36,7 +16,8 @@ btnEnviar.addEventListener('click', () => {
         }
     }).then(
         (res) => {
-            console.log(res.data)
+            console.log(res.data);
+            location.reload();
         }
     ).catch((err => console.log(err)))
 });
@@ -48,9 +29,8 @@ btnEliminar.addEventListener('click', () => {
         url: 'https://localhost:44389/api/hospedaje/' + id
     }).then(
         (res) => {
-            console.log(res.data)
+            console.log(res.data);
+            location.reload();
         }
     ).catch((err => console.log(err)))
 });
-
-
