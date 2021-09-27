@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿    using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +19,11 @@ namespace backend.Controllers
             Titulo = "Hospedaje de ejemplo " + index,
             Tipo = "Apartamento",
             Direccion = "Cra " + index,
-            Servicios = new string[] { "Wifi", "Television" }
+            Ubicacion = "Facatativa",
+            Precio = index*1000,
+            UserId = index,
+            Servicios = new string[] { "Wifi", "Television" },
+            Imagen = "https://res.cloudinary.com/drwoisvgb/image/upload/v1632877491/s8ki07h9d7toqqdmemjf.jpg"
         }).ToArray();
 
         // GET: api/<HospedajeController>
@@ -60,8 +64,11 @@ namespace backend.Controllers
             int indexAEditar = Hospedajes.ToList().FindIndex(n => n.Id == id);
 
             Hospedajes[indexAEditar].Titulo = hospedaje.Titulo;
-            Hospedajes[indexAEditar].Direccion = hospedaje.Direccion;
             Hospedajes[indexAEditar].Tipo = hospedaje.Tipo;
+            Hospedajes[indexAEditar].Direccion = hospedaje.Direccion;
+            Hospedajes[indexAEditar].Ubicacion = hospedaje.Ubicacion;
+            Hospedajes[indexAEditar].Precio = hospedaje.Precio;
+
         }
 
         // DELETE api/<HospedajeController>/5
