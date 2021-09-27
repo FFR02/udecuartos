@@ -17,5 +17,6 @@ namespace Backend.Models
         public string Direccion { get; set; }
 
         public string[] Servicios { get; set; }
+        public string Imagen { get; set; }
     }
 }
