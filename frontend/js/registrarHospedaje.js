@@ -7,11 +7,7 @@ const imageUpload = document.getElementById('img-upload');
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/drwoisvgb/image/upload';
 const CLOUDINARY_UPLOAD_PRESET = 'bszh8nk7';
 
-<<<<<<< HEAD
 var imgURL="imagen";
-=======
-var imgURL;
->>>>>>> vue
 
 imageUpload.addEventListener('change', async (e) => {
     const file = e.target.files[0];
@@ -41,12 +37,9 @@ btnEnviar.addEventListener('click', () => {
     let titulo = document.getElementById('titulo').value;
     let tipo = document.getElementById('tipoHospedaje').value;
     let direccion = document.getElementById('direccion').value;
-<<<<<<< HEAD
     let ubicacion = document.getElementById('ubicacion').value;
     let precio = document.getElementById('precio').value;
     precioNumber = parseInt(precio, 10);
-=======
->>>>>>> vue
     axios({
         method: 'post',
         url: 'https://localhost:44389/api/hospedaje',
@@ -54,11 +47,8 @@ btnEnviar.addEventListener('click', () => {
             'titulo': titulo,
             'tipo': tipo,
             'direccion': direccion,
-<<<<<<< HEAD
             'ubicacion': ubicacion,
             'precio': precioNumber,
-=======
->>>>>>> vue
             'imagen': imgURL
         }
     }).then(
