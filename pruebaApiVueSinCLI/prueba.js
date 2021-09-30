@@ -3,6 +3,8 @@ const app = new Vue({
     data: function () {
         return {
             hospedajes: [],
+            modal: false,
+            currentHosp: {}
         };
     },
     created() {
@@ -24,6 +26,15 @@ const app = new Vue({
                     console.log(result);
                     console.log(err);
                 });
+        },
+        verModal(id) {
+            this.fetchOne(id);
+        },
+        async fetchOne(id) {
+            let url = "https://localhost:44389/api/hospedaje/" + id;
+            let result = await axios.get(url);
+            this.currentHosp = result.data;
+            this.modal = true;
         },
     }
 });

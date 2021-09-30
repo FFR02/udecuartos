@@ -2,15 +2,15 @@
   <div
     class="column is-12-mobile is-4-desktop is-4-tablet"
   >
-    <div class="card">
+    <div class="card has-equal-height">
       <div class="card-header">
         <img v-bind:src="hospedaje.imagen" v-bind:alt="hospedaje.titulo" />
       </div>
       <div class="card-content">
-        <h3 class="title is-size-4">{{ hospedaje.titulo }}</h3>
-        <h4 class="title is-size-5">${{ hospedaje.precio }}</h4>
-        <h5 class="title is-size-6">{{ hospedaje.ubicacion }}</h5>
-        <button class="button is-success is-rounded is-small">Ver mas</button>
+        <h4 class="title is-size-4">{{ hospedaje.titulo }}</h4>
+        <h5 class="title is-size-5">${{ hospedaje.precio }}</h5>
+        <h6 class="title is-size-6">{{ hospedaje.ubicacion }}</h6>
+        <button class="button is-success is-rounded is-small" @click="verMas(hospedaje.id)">Ver mas</button>
       </div>
     </div>
   </div>
@@ -18,6 +18,11 @@
 
 <script>
 export default{
-    props: ['hospedaje']
+    props: ['hospedaje'],
+    methods: {
+      verMas(id){
+        this.$emit("verModal", id)
+      }
+    }
 };
 </script>
