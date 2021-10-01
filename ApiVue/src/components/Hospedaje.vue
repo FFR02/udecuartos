@@ -10,7 +10,11 @@
         <h4 class="title is-size-4">{{ hospedaje.titulo }}</h4>
         <h5 class="title is-size-5">${{ hospedaje.precio }}</h5>
         <h6 class="title is-size-6">{{ hospedaje.ubicacion }}</h6>
-        <button class="button is-success is-rounded is-small" @click="verMas(hospedaje.id)">Ver mas</button>
+        <div class="has-text-centered">
+          <button class="button is-success is-rounded" @click="verMas(hospedaje.id)">Ver mas</button>
+        </div>
+
+        
       </div>
     </div>
   </div>

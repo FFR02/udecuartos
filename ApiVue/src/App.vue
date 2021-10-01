@@ -32,15 +32,17 @@
     </div>
     <div class="modal" :class="{ 'is-active': modal }" v-if="modal">
       <div class="modal-background" @click="modal = false"></div>
-      <div class="modal-card" >
+      <div class="modal-card" style="width:1200px; height: 800px">
         <header class="modal-card-head">
-          <p class="modal-card-title">{{ currentHosp.tipo }} en {{currentHosp.ubicacion}}</p>
+          <p class="modal-card-title">
+            {{ currentHosp.tipo }} en {{ currentHosp.ubicacion }}
+          </p>
           <button class="delete" @click="modal = false"></button>
         </header>
         <div class="modal-card-body">
           <section>
             <div class="container">
-              <div class="columns">
+              <div class="columns ">
                 <div class="column">
                   <img v-bind:src="currentHosp.imagen" alt="" />
                 </div>
@@ -54,7 +56,9 @@
                         <h5 class="title is-5">{{ currentHosp.ubicacion }}</h5>
                         <h5 class="title is-5">{{ currentHosp.direccion }}</h5>
                         <div class="has-text-centered">
-                          <button class="button is-success is-rounded is-medium">
+                          <button
+                            class="button is-success is-rounded is-medium"
+                          >
                             Comprar
                           </button>
                         </div>
@@ -84,7 +88,7 @@ export default {
     return {
       hospedajes: [],
       modal: false,
-      currentHosp: {}
+      currentHosp: {},
     };
   },
   created() {
@@ -123,4 +127,5 @@ export default {
 <style>
 
 @import "~bulma/css/bulma.css";
+
 </style>
