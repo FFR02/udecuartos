@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Backend.Models;
+using System.Collections;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -77,6 +78,23 @@ namespace backend.Controllers
         {
             int indexABorrar = Hospedajes.ToList().FindIndex(n => n.Id == id);
             Hospedajes = Hospedajes.Where((source, index) => index != indexABorrar).ToArray();
+        }
+
+        // GET api/<HospedajeController>/search?query=<Location>
+        [HttpGet]
+        [Route("search")]
+        public IActionResult SearchByLocation([FromQuery] string query) 
+        {
+            ArrayList result = new ArrayList();
+            foreach (Hospedaje hospedaje in Hospedajes)
+            {
+                if (hospedaje.Ubicacion.Equals(query))
+                {
+                    result.Add(hospedaje);
+                }
+            }
+
+            return Ok(result);
         }
     }
 }
