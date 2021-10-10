@@ -9,13 +9,13 @@ namespace Backend.Models
     public class Hospedaje
     {
         public int Id { get; set; }
-        [Required]
         public string Titulo { get; set; }
-        [Required]
         public string Tipo { get; set; }
-        [Required]
         public string Direccion { get; set; }
-
+        public string Ubicacion { get; set; }
+        public long Precio { get; set; }
+        public int UserId { get; set; }
         public string[] Servicios { get; set; }
+        public string Imagen { get; set; }
     }
 }

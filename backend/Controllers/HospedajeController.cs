@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿    using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Backend.Models;
+using System.Collections;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,7 +20,11 @@ namespace backend.Controllers
             Titulo = "Hospedaje de ejemplo " + index,
             Tipo = "Apartamento",
             Direccion = "Cra " + index,
-            Servicios = new string[] { "Wifi", "Television" }
+            Ubicacion = "Facatativa",
+            Precio = index*1000,
+            UserId = index,
+            Servicios = new string[] { "Wifi", "Television" },
+            Imagen = "https://res.cloudinary.com/drwoisvgb/image/upload/v1632877491/s8ki07h9d7toqqdmemjf.jpg"
         }).ToArray();
 
         // GET: api/<HospedajeController>
@@ -60,8 +65,11 @@ namespace backend.Controllers
             int indexAEditar = Hospedajes.ToList().FindIndex(n => n.Id == id);
 
             Hospedajes[indexAEditar].Titulo = hospedaje.Titulo;
-            Hospedajes[indexAEditar].Direccion = hospedaje.Direccion;
             Hospedajes[indexAEditar].Tipo = hospedaje.Tipo;
+            Hospedajes[indexAEditar].Direccion = hospedaje.Direccion;
+            Hospedajes[indexAEditar].Ubicacion = hospedaje.Ubicacion;
+            Hospedajes[indexAEditar].Precio = hospedaje.Precio;
+
         }
 
         // DELETE api/<HospedajeController>/5
@@ -70,6 +78,23 @@ namespace backend.Controllers
         {
             int indexABorrar = Hospedajes.ToList().FindIndex(n => n.Id == id);
             Hospedajes = Hospedajes.Where((source, index) => index != indexABorrar).ToArray();
+        }
+
+        // GET api/<HospedajeController>/search?query=<Location>
+        [HttpGet]
+        [Route("search")]
+        public IActionResult SearchByLocation([FromQuery] string query) 
+        {
+            ArrayList result = new ArrayList();
+            foreach (Hospedaje hospedaje in Hospedajes)
+            {
+                if (hospedaje.Ubicacion.ToLower().Equals(query))
+                {
+                    result.Add(hospedaje);
+                }
+            }
+
+            return Ok(result);
         }
     }
 }

@@ -1,20 +1,33 @@
+var app = new Vue({
+    el: '#app',
+    data: function() {
+        return {
+            message: 'Kevin',
+            stringSearch: 'facatativa',
+            hospedajes: []
+        };
+    },
+    created() {
+        this.search();
+    },
+    methods: {
+        search: function() {
+            const titleSearch = document.getElementById("search-result-title");
+            titleSearch.textContent = this.stringSearch;
 
-function getData(){
-    axios({
-        method: 'GET',
-        url: 'https://localhost:44389/api/hospedaje'
-    }).then(res => {
-        const list = document.getElementById('list')
-        const fragment = document.createDocumentFragment()
-        for (const userInfo of res.data) {
-            const listItem = document.createElement('LI')
-            listItem.textContent = `${userInfo.id} - ${userInfo.titulo} - ${userInfo.tipo} - ${userInfo.direccion}`
-            listItem.className = "list-group-item";
-            fragment.appendChild(listItem)
+            const params = {
+                query: this.stringSearch.toLowerCase()
+            };
+
+            axios
+                .get("https://localhost:44389/api/hospedaje/search", { params })
+                .then((res) => {
+                    this.hospedajes = res.data;
+                    console.log(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
-        list.appendChild(fragment)
-    }).catch(err => console.log(err))
-}
-
-document.addEventListener('DOMContentLoaded', getData, false)
-
+    }
+})
