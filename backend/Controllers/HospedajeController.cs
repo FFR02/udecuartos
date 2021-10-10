@@ -88,7 +88,7 @@ namespace backend.Controllers
             ArrayList result = new ArrayList();
             foreach (Hospedaje hospedaje in Hospedajes)
             {
-                if (hospedaje.Ubicacion.Equals(query))
+                if (hospedaje.Ubicacion.ToLower().Equals(query))
                 {
                     result.Add(hospedaje);
                 }

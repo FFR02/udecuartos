@@ -1,32 +1,33 @@
-const imagePreview = document.getElementById('img-preview');
+var app = new Vue({
+    el: '#app',
+    data: function() {
+        return {
+            message: 'Kevin',
+            stringSearch: 'facatativa',
+            hospedajes: []
+        };
+    },
+    created() {
+        this.search();
+    },
+    methods: {
+        search: function() {
+            const titleSearch = document.getElementById("search-result-title");
+            titleSearch.textContent = this.stringSearch;
 
-function getData() {
-    axios({
-        method: 'GET',
-        url: 'https://localhost:44389/api/hospedaje'
-    }).then(res => {
-        const list = document.getElementById('list')
-        const fragment = document.createDocumentFragment()
-        for (const userInfo of res.data) {
-            const listItem = document.createElement('LI')
-            const imagen = document.createElement('img')
-            listItem.textContent = `${userInfo.id} - ${userInfo.titulo} - ${userInfo.tipo} - ${userInfo.direccion} - ${userInfo.imagen}`
-            listItem.className = "list-group-item";
-            imagen.src = `${userInfo.imagen}`;
+            const params = {
+                query: this.stringSearch.toLowerCase()
+            };
 
-            var a = document.createElement('a');
-            var linkText = document.createTextNode("Detalles");
-            a.appendChild(linkText);
-            a.title = "Detalles";
-            a.href = "#";
-
-            fragment.appendChild(imagen);
-            fragment.appendChild(a);
-            fragment.appendChild(listItem)
+            axios
+                .get("https://localhost:44389/api/hospedaje/search", { params })
+                .then((res) => {
+                    this.hospedajes = res.data;
+                    console.log(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
-        list.appendChild(fragment)
-    }).catch(err => console.log(err))
-}
-
-document.addEventListener('DOMContentLoaded', getData, false)
-
+    }
+})
