@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Backend.Models
 {
+    [Table("User", Schema = "public")]
     public class User
     {
-        public int Id { get; set; }
+        [Key]
+        public int id { get; set; }
         [Required]
-        public string Nombre { get; set; }
+        public string nombre { get; set; }
         [Required]
-        public string Cedula { get; set; }
+        public long cedula { get; set; }
         [Required]
-        public string Ubicacion { get; set; }
+        public string ubicacion { get; set; }
     }
 }
 
