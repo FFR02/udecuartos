@@ -18,6 +18,10 @@ namespace Backend.Models
         public long cedula { get; set; }
         [Required]
         public string ubicacion { get; set; }
+        public string correo { get; set; }
+        public string clave { get; set; }
+        public string sal { get; set; }
+
     }
 }
 

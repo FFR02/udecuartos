@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Backend.Models;
 using backend.Context;
 using Microsoft.EntityFrameworkCore;
+using backend.Helper;
 
 namespace backend.Controllers
 {
@@ -47,6 +48,9 @@ namespace backend.Controllers
         [HttpPost]
         public void Post([FromBody] User user)
         {
+            var hash = HashHelper.Hash(user.clave);
+            user.clave = hash.Password;
+            user.sal = hash.Salt;
             context.User.Add(user);
             context.SaveChanges();
         }
