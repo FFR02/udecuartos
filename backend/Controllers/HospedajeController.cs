@@ -90,15 +90,8 @@ namespace backend.Controllers
         public IActionResult SearchByLocation([FromQuery] string query)
         {
             ArrayList result = new ArrayList();
-            var x = context.Hospedaje.FirstOrDefault(p => p.ubicacion == query);
+            var x = context.Hospedaje.FirstOrDefault(p => p.ubicacion.ToLower() == query.ToLower());
             result.Add(x);
-            //foreach (Hospedaje hospedaje in Hospedajes)
-            //{
-            //    if (hospedaje.Ubicacion.ToLower().Equals(query))
-            //    {
-            //        result.Add(hospedaje);
-            //    }
-            //}
 
             return Ok(result);
         }
