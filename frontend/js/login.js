@@ -1,17 +1,19 @@
 const btnLog = document.getElementById('btnLog');
 
-btnEnviar.addEventListener('click', () => {
+btnLog.addEventListener('click', () => {
     let correo = document.getElementById('correo').value;
     let clave = document.getElementById('clave').value;
     axios({
-        method: '',
-        url: '',
+        method: 'post',
+        url: 'https://localhost:44389/api/login',
         data: {
+            'correo': correo,
+            'clave': clave
         }
     }).then(
         (res) => {
             console.log(res.data);
-            location.reload();
+            //location.reload();
         }
     ).catch((err => console.log(err)));
 });

@@ -43,7 +43,7 @@ namespace backend.Controllers
             var x = context.User.FirstOrDefault(p => p.id == id);
             return x;
         }
-
+        //Crea el usuario con la clave hash
         // POST api/<InmuebleController>
         [HttpPost]
         public void Post([FromBody] User user)

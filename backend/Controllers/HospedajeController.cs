@@ -7,6 +7,8 @@ using System.Collections;
 using backend.Context;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,6 +16,7 @@ namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class HospedajeController : ControllerBase
     {
         private readonly AppDbContext context;
@@ -36,13 +39,15 @@ namespace backend.Controllers
         //}).ToArray();
 
         // GET: api/<HospedajeController>
+
+        [AllowAnonymous]
         [HttpGet]
         public IEnumerable<Hospedaje> Get()
         {
 
             return context.Hospedaje.ToList();
         }
-
+        
         // GET api/<HospedajeController>/5
         [HttpGet("{id}")]
         public Hospedaje Get(int id)
