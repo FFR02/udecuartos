@@ -89,16 +89,7 @@ namespace backend.Controllers
         [Route("search")]
         public IActionResult SearchByLocation([FromQuery] string query)
         {
-            ArrayList result = new ArrayList();
-            var x = context.Hospedaje.FirstOrDefault(p => p.ubicacion == query);
-            result.Add(x);
-            //foreach (Hospedaje hospedaje in Hospedajes)
-            //{
-            //    if (hospedaje.Ubicacion.ToLower().Equals(query))
-            //    {
-            //        result.Add(hospedaje);
-            //    }
-            //}
+            var result = context.Hospedaje.Where(p => p.ubicacion.ToLower().Contains(query.ToLower())).ToList();
 
             return Ok(result);
         }
