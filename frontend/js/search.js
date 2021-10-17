@@ -1,17 +1,25 @@
-    var app = new Vue({
+var app = new Vue({
     el: '#app',
-    data: function() {
+    data: function () {
         return {
             message: 'Kevin',
-            stringSearch: 'facatativa',
+            stringSearch: '',
             hospedajes: []
         };
     },
     created() {
+        const params = window.location.search;
+        const urlParams = new URLSearchParams(params);
+
+        if(urlParams.has('q')) {
+            let query = urlParams.get('q');
+            this.stringSearch = query
+        }
+
         this.search();
     },
     methods: {
-        search: function() {
+        search: function () {
             const titleSearch = document.getElementById("search-result-title");
             titleSearch.textContent = this.stringSearch;
 
