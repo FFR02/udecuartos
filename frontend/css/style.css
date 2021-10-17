@@ -1,3 +1,7 @@
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
 .banner {
     position: relative;
     margin-right: 0;
@@ -5,4 +9,27 @@
     color: black;
     background: gainsboro;
     overflow: hidden;
+}
+
+
+.cover {
+    height: 100vh;
+    color: white;
+    background-image: url(../resource/logImg.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+}
+
+div.row {
+    margin-right: 0px;
+}
+
+div.container-fluid {
+    padding-right: 0px;
+}
+
+.btn-shadow:hover {
+    box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.4);
 }

@@ -1,94 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Inicia sesion</title>
 
     <link rel="stylesheet" href="./css/login.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
-</head>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital@1&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+  <body>
+    <div id="app">
+      <div class="row">
+        <div class="col-12 col-md-6 p-0">
+          <div class="px-5 mx-5 my-4">
+            <a class="navbar-brand" href="./index.html">UdeCuartos</a>
+          </div>
+          <div class="d-flex flex-column px-5 m-5">
+            <h1 class="text-center">¡Bienvenido!</h1>
+            <h4 class="mt-4">Ingresa con tu correo electronico</h4>
+            <form>
+              <div class="form-group mb-3">
+                <input
+                  id="correo"
+                  type="email"
+                  placeholder="Correo electronico"
+                  class="form-control py-4 my-4"
+                />
+              </div>
+              <div class="form-group mb-3">
+                <input
+                  id="clave"
+                  type="password"
+                  placeholder="Contraseña"
+                  class="form-control py-4"
+                />
+              </div>
+            </form>
+            <button
+              type="submit"
+              id="btnLog"
+              class="btn btn-dark btn-shadow btn-block p-2 my-4"
+            >
+              Inicia sesion
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Ayuda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Acerca de</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">¡Vuelvete arrendatario!</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <button class="btn btn-outline-dark my-2 my-sm-0 mr-3" type="submit">
-                        Iniciar sesion
-                    </button>
-                    <button class="btn btn-dark my-2 my-sm-0" type="submit">
-                        Registrarse
-                    </button>
-                </form>
+            <div
+              class="text-center d-flex justify-content-between mt-2 mx-auto"
+            >
+              <p>No tienes una cuenta? <a href="#">Registrate</a></p>
             </div>
-        </nav>
-    </header>
-    <main>
-        <div class="container-fluid">
-            <div class="row no-gutter">
-                <div class="col-md-6 d-none d-md-flex bg-image"></div>
-                <div class="col-md-6 bg-light">
-                    <div class="login d-flex align-items-center py-5">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-7 col-xl-6 mx-auto">
-                                    <h3 class="display-4 font-weight-bold">BIENVENIDO</h3>
-                                    <h4>Ingresa a tu cuenta</h4>
-                                    <form>
-                                        <div class="form-group mb-3">
-                                            <input id="correo" type="email" placeholder="udecuartos@gmail.com"
-                                                class="form-control rounded-pill border-0 shadow-sm px-4 my-4">
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <input id="clave" type="password" placeholder="*******"
-                                                class="form-control rounded-pill border-0 shadow-sm px-4">
-                                        </div>
-                                        
-                                    </form>
-                                    <button type="submit" id="btnLog"
-                                            class="btn btn-dark btn-block text-uppercase rounded-pill my-4">Ingresar</button>
-                                        <div class="text-center d-flex justify-content-between mt-4">
-                                            <p>No tienes una cuenta? <a href="#">Registrate aquí</a></p>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div
+              class="text-center d-flex justify-content-between mt-2 mx-auto"
+            >
+              <a href="#">¿Olvidate tú contraseña?</a>
             </div>
+          </div>
         </div>
-    </main>
+        <div class="col-md-6 d-none d-md-block p-0">
+          <div
+            class="
+              cover
+              p-5
+              d-flex
+              justify-content-end
+              align-items-start
+              flex-column
+            "
+          >
+            <h1>The largest community</h1>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+      crossorigin="anonymous"
+    ></script>
     <script src="./js/login.js"></script>
-</body>
-
+  </body>
 </html>
