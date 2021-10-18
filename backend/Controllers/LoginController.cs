@@ -47,9 +47,9 @@ namespace backend.Controllers
             {
                 var secretKey = config.GetValue<string>("SecretKey");
                 var key = Encoding.ASCII.GetBytes(secretKey);
-
+                var userid = user.id.ToString();
                 var claims = new ClaimsIdentity();
-                claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, login.Correo));
+                claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, login.Correo, user.nombre, userid));
 
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
@@ -65,7 +65,13 @@ namespace backend.Controllers
 
                 //bearer_token es nuestro token
                 string bearer_token = tokenHandler.WriteToken(createdToken);
-                return Ok(bearer_token);
+                return Ok(new {
+                    token = bearer_token,
+                    userData = new {
+                        id = user.id,
+                        userName = user.nombre
+                    }
+                });
             }
             else
             {
