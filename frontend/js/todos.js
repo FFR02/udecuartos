@@ -40,6 +40,7 @@ const app = new Vue({
             let url = "https://localhost:44389/api/hospedaje/" + id;
             let result = await axios.get(url);
             this.currentHosp = result.data;
+            $('#modalID').modal('show')
             this.modal = true;
         },
         cerrarSesion(){

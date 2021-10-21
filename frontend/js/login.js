@@ -1,11 +1,3 @@
-// const btnLog = document.getElementById('btnLog');
-
-// btnLog.addEventListener('click', () => {
-//     let correo = document.getElementById('correo').value;
-//     let clave = document.getElementById('clave').value;
-
-// });
-
 const app = new Vue({
     el: "#app",
     data: function () {
@@ -30,7 +22,7 @@ const app = new Vue({
                     console.log(res.data);
                     localStorage.setItem('user_token', res.data.token);
                     localStorage.setItem('user_id', res.data.userData.id);
-                    location.href ="./prueba.html";
+                    location.href ="./todos.html";
                 }
             ).catch((err => console.log(err)));
 
