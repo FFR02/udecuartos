@@ -95,6 +95,7 @@ namespace backend.Controllers
         public IActionResult SearchByLocation([FromQuery] string query)
         {
             var result = context.Hospedaje.Where(p => p.ubicacion.ToLower().Contains(query.ToLower())).ToList();
+
             return Ok(result);
         }
 
