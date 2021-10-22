@@ -1,8 +1,49 @@
+body {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Proza Libre', sans-serif !important;
+}
+
+nav.bg-light {
+    background-color: white !important;
+}
+
 .banner {
-    position: relative;
-    margin-right: 0;
-    width: 100%;
-    color: black;
-    background: gainsboro;
-    overflow: hidden;
+    height: 450px;
+    color: white;
+    background-image: url("https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+}
+
+.banner-small {
+    height: 225px;
+    background-color: #F3F3F4;
+}
+
+
+.cover {
+    height: 100vh;
+    color: white;
+    background-image: url(../resource/logImg.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+}
+
+div.row {
+    margin-right: 0px;
+}
+
+div.container-fluid {
+    padding-right: 0px;
+}
+
+.btn-shadow:hover {
+    box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.4);
 }
