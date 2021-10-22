@@ -32,13 +32,14 @@
           <div class="d-flex flex-column px-5 m-5">
             <h1 class="text-center">¡Bienvenido!</h1>
             <h4 class="mt-4">Ingresa con tu correo electronico</h4>
-            <form>
+            <form @submit.prevent="login">
               <div class="form-group mb-3">
                 <input
                   id="correo"
                   type="email"
                   placeholder="Correo electronico"
                   class="form-control py-4 my-4"
+                  v-model="correo"
                 />
               </div>
               <div class="form-group mb-3">
@@ -47,20 +48,23 @@
                   type="password"
                   placeholder="Contraseña"
                   class="form-control py-4"
+                  v-model="clave"
                 />
               </div>
+              <button
+                type="submit"
+                id="btnLog"
+                class="btn btn-dark btn-shadow btn-block p-2 my-4"
+              >
+                Inicia sesion
+              </button>
             </form>
-            <button
-              type="submit"
-              id="btnLog"
-              class="btn btn-dark btn-shadow btn-block p-2 my-4"
-            >
-              Inicia sesion
-            </button>
             <div
               class="text-center d-flex justify-content-between mt-2 mx-auto"
             >
-              <p>No tienes una cuenta? <a href="./signup.html">Registrate</a></p>
+              <p>
+                No tienes una cuenta? <a href="./signup.html">Registrate</a>
+              </p>
             </div>
             <div
               class="text-center d-flex justify-content-between mt-2 mx-auto"
@@ -89,6 +93,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"

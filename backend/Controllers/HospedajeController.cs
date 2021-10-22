@@ -90,6 +90,7 @@ namespace backend.Controllers
         }
 
         // GET api/<HospedajeController>/search?query=<Location>
+        [AllowAnonymous]
         [HttpGet]
         [Route("search")]
         public IActionResult SearchByLocation([FromQuery] string query)

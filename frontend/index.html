@@ -122,10 +122,11 @@
         },
         methods: {
           search: function() {
-            if(this.stringSearch == '') {
+            if(this.stringSearch != '') {
               window.location.href = './search.html?q=' + this.stringSearch;
+            } else {
+              window.location.href = './search.html';
             }
-            window.location.href = './search.html';
           }
         }
       })

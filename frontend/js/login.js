@@ -12,7 +12,7 @@ const app = new Vue({
             axios({
 
                 method: 'post',
-                url: 'https://localhost:44389/api/login',
+                url: 'https://localhost:49153/api/login',
                 data: {
                     'correo': this.correo,
                     'clave': this.clave
