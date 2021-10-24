@@ -3,7 +3,7 @@ const imagePreview = document.getElementById('img-preview');
 function getData() {
     axios({
         method: 'GET',
-        url: 'https://localhost:49153/api/hospedaje'
+        url: 'https://localhost:49159/api/hospedaje'
     }).then(res => {
         const list = document.getElementById('list')
         const fragment = document.createDocumentFragment()

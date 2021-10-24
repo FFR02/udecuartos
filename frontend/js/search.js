@@ -28,7 +28,7 @@ var app = new Vue({
             };
 
             axios
-                .get("https://localhost:49153/api/hospedaje/search", { params })
+                .get("https://localhost:49159/api/hospedaje/search", { params })
                 .then((res) => {
                     this.hospedajes = res.data;
                     console.log(res.data);

@@ -40,7 +40,7 @@ namespace backend.Controllers
 
         // GET: api/<HospedajeController>
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpGet]
         public IEnumerable<Hospedaje> Get()
         {

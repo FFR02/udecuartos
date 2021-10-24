@@ -42,7 +42,7 @@ btnEnviar.addEventListener('click', () => {
     precioNumber = parseInt(precio, 10);
     axios({
         method: 'post',
-        url: 'https://localhost:49153/api/hospedaje',
+        url: 'https://localhost:49159/api/hospedaje',
         data: {
             'titulo': titulo,
             'tipo': tipo,
@@ -63,7 +63,7 @@ btnEliminar.addEventListener('click', () => {
     let id = document.getElementById('identificador').value;
     axios({
         method: 'delete',
-        url: 'https://localhost:49153/api/hospedaje/' + id
+        url: 'https://localhost:49159/api/hospedaje/' + id
     }).then(
         (res) => {
             console.log(res.data);

@@ -33,6 +33,9 @@
             <h1 class="text-center">¡Bienvenido!</h1>
             <h4 class="mt-4">Ingresa con tu correo electronico</h4>
             <form @submit.prevent="login">
+              <div v-if="error" class="alert alert-danger" role="alert">
+                ¡Verifica tu información!
+              </div>
               <div class="form-group mb-3">
                 <input
                   id="correo"
@@ -40,6 +43,7 @@
                   placeholder="Correo electronico"
                   class="form-control py-4 my-4"
                   v-model="correo"
+                  required
                 />
               </div>
               <div class="form-group mb-3">
@@ -49,6 +53,7 @@
                   placeholder="Contraseña"
                   class="form-control py-4"
                   v-model="clave"
+                  required
                 />
               </div>
               <button

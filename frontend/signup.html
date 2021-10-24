@@ -1,122 +1,106 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registrate</title>
 
-    <link rel="stylesheet" href="./css/login.css" />
-    <link rel="stylesheet" href="./css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-      crossorigin="anonymous"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Proza+Libre&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrate</title>
 
-  <body>
-    <div id="app">
-      <div class="row">
-        <div class="col-md-6 d-none d-md-block p-0">
-          <div
-            class="
+  <link rel="stylesheet" href="./css/login.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Proza+Libre&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div id="app">
+    <div class="row">
+      <div class="col-md-6 d-none d-md-block p-0">
+        <div class="
               cover
               p-5
               d-flex
               justify-content-center
               align-items-center
               flex-column
-            "
-          >
-            <h1>The largest community</h1>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-          </div>
+            ">
+          <h1>The largest community</h1>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
         </div>
-        <div class="col-12 col-md-6 p-0">
-          <div class="px-5 mx-5 my-4">
-            <a class="navbar-brand" href="./index.html">UdeCuartos</a>
-          </div>
-          <div class="d-flex flex-column px-5 m-5">
-            <h1 class="text-center">Crea tu cuenta</h1>
-            <h4 class="mt-4">Usa tu correo electronico</h4>
-            <form>
-              <div class="form-row mt-4">
-                <div class="form-group col-md-6">
-                  <input
-                    type="email"
-                    class="form-control py-4"
-                    id="inputEmail"
-                    placeholder="Nombres"
-                  />
-                </div>
-                <div class="form-group col-md-6">
-                  <input
-                    type="password"
-                    class="form-control py-4"
-                    id="inputPassword"
-                    placeholder="Apellidos"
-                  />
-                </div>
-              </div>
-              <div class="form-group">
-                <input
-                  id="correo"
-                  type="email"
-                  placeholder="Correo electronico"
-                  class="form-control py-4"
-                />
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <input
-                    type="email"
-                    class="form-control py-4"
-                    id="inputEmail"
-                    placeholder="Contraseña"
-                  />
-                </div>
-                <div class="form-group col-md-6">
-                  <input
-                    type="password"
-                    class="form-control py-4"
-                    id="inputPassword"
-                    placeholder="Repite tu contraseña"
-                  />
-                </div>
-              </div>
-            </form>
-            <button
-              type="submit"
-              id="btnLog"
-              class="btn btn-dark btn-shadow btn-block p-2 my-4"
-            >
-              Inicia sesion
-            </button>
-            <div
-              class="text-center d-flex justify-content-between mt-2 mx-auto"
-            >
-              <p>¿Ya tienes una cuenta? <a href="./login.html">Inicia sesión</a></p>
+      </div>
+      <div class="col-12 col-md-6 p-0">
+        <div class="px-5 mx-5 my-4">
+          <a class="navbar-brand" href="./index.html">UdeCuartos</a>
+        </div>
+        <div class="d-flex flex-column px-5 m-5">
+          <h1 class="text-center">Crea tu cuenta</h1>
+          <h4 class="mt-4">Usa tu correo electronico</h4>
+          <form @submit.prevent="validar">
+            <div v-if="error" class="alert alert-danger" role="alert">
+              ¡Las contraseñas no coinciden!
             </div>
+            <div class="form-row mt-4">
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control py-4" id="nombres" placeholder="Nombres" v-model="nombres" required/>
+              </div>
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control py-4" id="apellidos" placeholder="Apellidos"
+                  v-model="apellidos" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <input id="correo" type="email" placeholder="Correo electronico" class="form-control py-4"
+                v-model="correo" required/>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control py-4" id="cedula" placeholder="Documento de identidad"
+                  v-model="cedula" required/>
+              </div>
+              <div class="form-group col-md-6">
+                <input type="text" class="form-control py-4" id="ubicacion" placeholder="Ubicacion"
+                  v-model="ubicacion" required/>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <input type="password" class="form-control py-4" id="contraseña" placeholder="Contraseña"
+                  v-model="contraseña" required/>
+              </div>
+              <div class="form-group col-md-6">
+                <input type="password" class="form-control py-4" id="recontraseña" placeholder="Repite tu contraseña"
+                  v-model="recontraseña" required/>
+              </div>
+            </div>
+            <button type="submit" id="btnLog" class="btn btn-dark btn-shadow btn-block p-2 my-4">
+              Registrarse
+            </button>
+          </form>
+          <div class="text-center d-flex justify-content-between mt-2 mx-auto">
+            <p>¿Ya tienes una cuenta? <a href="./login.html">Inicia sesión</a></p>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
       crossorigin="anonymous"
     ></script>
-    <script src="./js/login.js"></script>
-  </body>
+  <script src="./js/signup.js"></script>
+</body>
+
 </html>

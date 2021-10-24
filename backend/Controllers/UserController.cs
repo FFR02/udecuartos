@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 using Backend.Models;
 using backend.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using backend.Helper;
 
 namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly AppDbContext context;
@@ -43,8 +45,11 @@ namespace backend.Controllers
             var x = context.User.FirstOrDefault(p => p.id == id);
             return x;
         }
+
+
         //Crea el usuario con la clave hash
         // POST api/<InmuebleController>
+        [AllowAnonymous]
         [HttpPost]
         public void Post([FromBody] User user)
         {
