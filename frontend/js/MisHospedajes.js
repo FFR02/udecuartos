@@ -5,7 +5,9 @@ const app = new Vue({
             hospedajes: [],
             modal: false,
             currentHosp: {},
-            nombre: ''
+            nombre: '',
+            error: false,
+
         };
     },
     created() {
@@ -14,22 +16,25 @@ const app = new Vue({
         }else{
             location.href ="./login.html";
         }
-        
     },
     methods: {
         fetch() {
-            this.nombre = localStorage.getItem('user_id')
+            this.nombre = localStorage.getItem('user_id');
             let result = axios
-                .get("https://localhost:49155/api/hospedaje",{
+                .get("https://localhost:49155/api/mishospedajes/"+localStorage.getItem('user_id'),{
                     headers: {'Authorization': 'Bearer '+ localStorage.getItem('user_token')}
                 })
                 .then((res) => {
                     //api hospedajes
-                    this.hospedajes = res.data;
-                    console.log(res.data);
+                    if(res.data == 'value' || res.data == 0){
+                        this.error = true;
+                    }else{
+                        this.error = false;
+                        this.hospedajes = res.data;
+                    }
+                    
                 })
                 .catch((err) => {
-                    console.log(result);
                     console.log(err);
                 });
         },
@@ -43,6 +48,22 @@ const app = new Vue({
             });
             this.currentHosp = result.data;
             $('#modalID').modal('show')
+            this.modal = true;;
+        },
+        eliminar(id){
+            axios({
+                method: 'delete',
+                url: 'https://localhost:49155/api/hospedaje/' + id,
+                headers: {'Authorization': 'Bearer '+ localStorage.getItem('user_token')}
+            }).then(
+                (res) => {
+                    console.log(res.data);
+                    location.href ="./mishospedajes.html";
+                }
+            ).catch((err => console.log(err)))
+        },
+        modalView(){
+            $('#modalR').modal('show')
             this.modal = true;
         },
         cerrarSesion(){

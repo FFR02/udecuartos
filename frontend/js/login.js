@@ -12,7 +12,7 @@ const app = new Vue({
         login() {
             axios({
                 method: 'post',
-                url: 'https://localhost:49159/api/login',
+                url: 'https://localhost:49155/api/login',
                 data: {
                     'correo': this.correo,
                     'clave': this.clave
@@ -23,7 +23,7 @@ const app = new Vue({
                     console.log(res.data);
                     localStorage.setItem('user_token', res.data.token);
                     localStorage.setItem('user_id', res.data.userData.id);
-                    location.href ="./todos.html";
+                    location.href ="./MisHospedajes.html";
                 }
             ).catch((err => 
                 console.log(err),

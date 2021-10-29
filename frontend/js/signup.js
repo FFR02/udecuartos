@@ -30,7 +30,7 @@ const app = new Vue({
             var docNumber = Number(this.cedula)
             axios({
                 method: 'post',
-                url: 'https://localhost:49159/api/user',
+                url: 'https://localhost:49155/api/user',
                 data: {
                     'nombre': this.nombreCompleto,
                     'cedula': docNumber,
