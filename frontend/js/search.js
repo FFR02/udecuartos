@@ -4,12 +4,17 @@ var app = new Vue({
         return {
             message: 'Kevin',
             stringSearch: '',
+            logged: false,
             hospedajes: []
         };
     },
     created() {
         const params = window.location.search;
         const urlParams = new URLSearchParams(params);
+
+        if (localStorage.getItem("user_token")) {
+            this.logged = true;
+        }
 
         if(urlParams.has('q')) {
             let query = urlParams.get('q');
@@ -36,6 +41,10 @@ var app = new Vue({
                 .catch((err) => {
                     console.log(err);
                 });
+        },
+        cerrarSesion: function(){
+            localStorage.clear();
+            location.href ="./login.html";
         }
     }
 })

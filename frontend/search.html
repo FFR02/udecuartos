@@ -53,7 +53,36 @@
               <a class="nav-link" href="#">¡Vuelvete arrendatario!</a>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
+          <div class="form-inline" v-if="logged">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+                    class="rounded-circle"
+                    alt="..."
+                    style="width: 30px"
+                  />
+                </a>
+                <div
+                  class="dropdown-menu dropdown-menu-right"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <a class="dropdown-item" href="#">Ver mi perfil</a>
+                  <a class="dropdown-item" href="./MisHospedajes.html">Mis hospedajes</a>
+                  <a class="dropdown-item" href="#" @click="cerrarSesion">Cerrar sesion</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <form class="form-inline my-2 my-lg-0" v-else>
             <a
               class="btn btn-outline-dark my-2 my-sm-0 mr-3"
               href="./login.html"

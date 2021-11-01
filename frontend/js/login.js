@@ -25,10 +25,10 @@ const app = new Vue({
                     localStorage.setItem('user_id', res.data.userData.id);
                     location.href ="./MisHospedajes.html";
                 }
-            ).catch((err => 
-                console.log(err),
+            ).catch((err) => {
+                console.log(err)
                 this.error=true
-                ));
+            });
 
         }
     }

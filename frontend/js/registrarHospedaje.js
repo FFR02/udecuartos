@@ -70,16 +70,16 @@ btnEnviar.addEventListener('click', () => {
     ).catch((err => console.log(err)));
 }, );
 
-// btnEliminar.addEventListener('click', () => {
-//     let id = document.getElementById('identificador').value;
-//     axios({
-//         method: 'delete',
-//         url: 'https://localhost:49155/api/hospedaje/' + id
-//     }).then(
-//         (res) => {
-//             console.log(res.data);
-//             location.reload();
-//         }
-//     ).catch((err => console.log(err)))
-// });
+btnEliminar.addEventListener('click', () => {
+    let id = document.getElementById('identificador').value;
+    axios({
+        method: 'delete',
+        url: 'https://localhost:49155/api/hospedaje/' + id
+    }).then(
+        (res) => {
+            console.log(res.data);
+            location.reload();
+        }
+    ).catch((err => console.log(err)))
+});
 

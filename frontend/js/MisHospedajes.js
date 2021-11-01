@@ -7,12 +7,13 @@ const app = new Vue({
             currentHosp: {},
             nombre: '',
             error: false,
-
+            logged: false
         };
     },
     created() {
         if(localStorage.getItem('user_token')){
             this.fetch();
+            this.logged = true;
         }else{
             location.href ="./login.html";
         }
@@ -32,7 +33,6 @@ const app = new Vue({
                         this.error = false;
                         this.hospedajes = res.data;
                     }
-                    
                 })
                 .catch((err) => {
                     console.log(err);

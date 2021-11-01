@@ -14,46 +14,85 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <nav
+        class="navbar navbar-expand-lg navbar-light bg-light sticky-top px-5"
+      >
+        <a class="navbar-brand" href="./index.html">UdeCuartos</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Ayuda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Acerca de</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">¡Vuelvete arrendatario!</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="" @click="cerrarSesion">Cerrar Sesion</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <button class="btn btn-outline-dark my-2 my-sm-0 mr-3" type="submit">
-                        Iniciar sesion
-                    </button>
-                    <button class="btn btn-dark my-2 my-sm-0" type="submit">
-                        Registrarse
-                    </button>
-                </form>
-            </div>
-        </nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"
+                >Inicio <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Ayuda</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Acerca de</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">¡Vuelvete arrendatario!</a>
+            </li>
+          </ul>
+          <div class="form-inline" v-if="logged">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownMenuLink"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img
+                    src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+                    class="rounded-circle"
+                    alt="..."
+                    style="width: 30px"
+                  />
+                </a>
+                <div
+                  class="dropdown-menu dropdown-menu-right"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <a class="dropdown-item" href="#">Ver mi perfil</a>
+                  <a class="dropdown-item" href="#" @click="cerrarSesion">Cerrar sesion</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <form class="form-inline my-2 my-lg-0" v-else>
+            <a
+              class="btn btn-outline-dark my-2 my-sm-0 mr-3"
+              href="./login.html"
+            >
+              Iniciar sesion
+            </a>
+            <a class="btn btn-dark my-2 my-sm-0" href="./signup.html">
+              Registrarse
+            </a>
+          </form>
+        </div>
+      </nav>
 
         <main>
-            <section class="container">
+            <section class="container mt-4">
                 <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3">
-                    <div class="col" v-for="hospedaje in hospedajes" v-bind="hospedaje.id">
+                    <div class="col" v-for="hospedaje in hospedajes" v-bind:key="hospedaje.id">
                         <div class="card" style="width: 18rem;" @click="verModal(hospedaje.id)">
                             <img v-bind:src="hospedaje.imagen" class="card-img-top" alt="...">
                             <div class="card-body">

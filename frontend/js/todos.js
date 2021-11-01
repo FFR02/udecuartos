@@ -5,16 +5,17 @@ const app = new Vue({
             hospedajes: [],
             modal: false,
             currentHosp: {},
+            logged: false,
             nombre: ''
         };
     },
     created() {
         if(localStorage.getItem('user_token')){
             this.fetch();
+            this.logged = true;
         }else{
             location.href ="./login.html";
         }
-        
     },
     methods: {
         fetch() {
