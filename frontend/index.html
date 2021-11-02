@@ -42,21 +42,34 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="#"
-                >Inicio <span class="sr-only">(current)</span></a
+                >{{ $t('inicio') }} <span class="sr-only">(current)</span></a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Ayuda</a>
+              <a class="nav-link" href="#">{{ $t('ayuda') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Acerca de</a>
+              <a class="nav-link" href="#">{{ $t('acercaDe') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">¡Vuelvete arrendatario!</a>
+              <a class="nav-link" href="#">{{ $t('vuelveteArrendador') }}</a>
             </li>
           </ul>
           <div class="form-inline" v-if="logged">
             <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-toggle="modal"
+                  data-target="#languageModal"
+                >
+                  <img
+                    src="./resource/globe.png"
+                    alt="globe"
+                    style="width: 25px"
+                  />
+                </a>
+              </li>
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
@@ -78,7 +91,9 @@
                   aria-labelledby="navbarDropdownMenuLink"
                 >
                   <a class="dropdown-item" href="#">Ver mi perfil</a>
-                  <a class="dropdown-item" href="./MisHospedajes.html">Mis hospedajes/a>
+                  <a class="dropdown-item" href="./MisHospedajes.html"
+                    >Mis hospedajes</a
+                  >
                   <a class="dropdown-item" href="#" @click="cerrarSesion"
                     >Cerrar sesion</a
                   >
@@ -87,15 +102,34 @@
             </ul>
           </div>
           <form class="form-inline my-2 my-lg-0" v-else>
-            <a
-              class="btn btn-outline-dark my-2 my-sm-0 mr-3"
-              href="./login.html"
-            >
-              Iniciar sesion
-            </a>
-            <a class="btn btn-dark my-2 my-sm-0" href="./signup.html">
-              Registrarse
-            </a>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-toggle="modal"
+                  data-target="#languageModal"
+                >
+                  <img
+                    src="./resource/globe.png"
+                    alt="globe"
+                    style="width: 25px"
+                  />
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="btn btn-outline-dark mx-auto mx-lg-2 mb-2 mb-lg-0"
+                  href="./login.html"
+                >
+                  {{ $t('iniciarSesion') }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="btn btn-dark" href="./signup.html">
+                  {{ $t('registrarse') }}
+                </a>
+              </li>
+            </ul>
           </form>
         </div>
       </nav>
@@ -118,21 +152,105 @@
               <input
                 type="text"
                 class="form-control"
-                placeholder="Agrega una ubicación"
+                :placeholder="$t('agregaUbicacion')"
                 @keyup.enter="search"
                 v-model="stringSearch"
                 required
               />
               <div class="input-group-append">
-                <button class="btn btn-dark" type="submit">Buscar</button>
+                <button class="btn btn-dark" type="submit">
+                  {{ $t('buscar') }}
+                </button>
               </div>
             </div>
           </form>
         </section>
+
+        <!-- Change language modal -->
+        <div
+          class="modal fade"
+          id="languageModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+          >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  {{ $t('seleccionaIdioma') }}
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <input
+                    type="radio"
+                    name="languages"
+                    id="es"
+                    class="hidebx"
+                    value="es"
+                  />
+                  <label for="es" class="lbl-radio">
+                    <div class="display-box">Español</div>
+                  </label>
+
+                  <input
+                    type="radio"
+                    name="languages"
+                    id="en"
+                    class="hidebx"
+                    value="en"
+                  />
+                  <label for="en" class="lbl-radio">
+                    <div class="display-box">English</div>
+                  </label>
+
+                  <input
+                    type="radio"
+                    name="languages"
+                    id="pt"
+                    class="hidebx"
+                    value="pt"
+                  />
+                  <label for="pt" class="lbl-radio">
+                    <div class="display-box">Português</div>
+                  </label>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  {{ $t('cerrar') }}
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  @click="changeLanguage"
+                >
+                  {{ $t('guardar') }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-i18n@8"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -146,17 +264,74 @@
     ></script>
 
     <script>
+      const i18n = new VueI18n({
+        locale: localStorage.getItem("lang"),
+        messages: {
+          es: {
+            inicio: "Inicio",
+            ayuda: "Ayuda",
+            acercaDe: "Acerca de",
+            vuelveteArrendador: "¡Vuelvete arrendador!",
+            iniciarSesion: "Iniciar sesion",
+            registrarse: "Registrarse",
+            buscar: "Buscar",
+            agregaUbicacion: "Agrega una ubicacion",
+            seleccionaIdioma: "Selecciona un idioma",
+            guardar: "Guardar",
+            cerrar: "Cerrar",
+            cerrarSesion: "Cerrar Sesion",
+          },
+          en: {
+            inicio: "Home",
+            ayuda: "Help",
+            acercaDe: "About us",
+            vuelveteArrendador: "¡Become a lessor!",
+            iniciarSesion: "Login",
+            registrarse: "Sign up",
+            buscar: "Search",
+            agregaUbicacion: "Add a location",
+            seleccionaIdioma: "Choose a language",
+            guardar: "Save",
+            cerrar: "Close",
+            cerrarSesion: "Log out",
+          },
+          pt: {
+            inicio: "Começo",
+            ayuda: "Ajuda",
+            acercaDe: "Sobre nós",
+            vuelveteArrendador: "!Se tornar um senhorio!",
+            iniciarSesion: "Entrar",
+            registrarse: "Cadastre-se",
+            buscar: "Procurar",
+            agregaUbicacion: "Adicionar um local",
+            seleccionaIdioma: "Escolha um idioma",
+            guardar: "Salve",
+            cerrar: "Fechar",
+            cerrarSesion: "Sair",
+          },
+        },
+      });
+
       new Vue({
         el: "#app",
+        i18n,
         data: function () {
           return {
             stringSearch: "",
             logged: false,
+            lang: localStorage.getItem("lang") || "es",
           };
         },
         created() {
           if (localStorage.getItem("user_token")) {
             this.logged = true;
+          }
+
+          let langs = document.getElementsByName("languages");
+          for (let i = 0; i < langs.length; i++) {
+            if (langs[i].value == this.lang) {
+              langs[i].setAttribute("checked", "");
+            }
           }
         },
         methods: {
@@ -170,6 +345,17 @@
           cerrarSesion: function () {
             localStorage.clear();
             location.href = "./login.html";
+          },
+          changeLanguage: function () {
+            let langs = document.getElementsByName("languages");
+
+            for (let i = 0; i < langs.length; i++) {
+              if (langs[i].checked) {
+                localStorage.setItem("lang", langs[i].value);
+              }
+            }
+
+            window.location.reload();
           },
         },
       });
