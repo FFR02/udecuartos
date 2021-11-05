@@ -1,4 +1,4 @@
-using backend.Controllers;
+﻿using backend.Controllers;
 using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,144 +10,125 @@ using System.Text;
 namespace UdeCuartosTest.PruebasUnitarias
 {
     [TestClass]
-    public class HospedajeControllerTests: BasePruebas
+    public class UserControllerTest : BasePruebas
     {
         [TestMethod]
-        public void ObtenerTodosLosHospedajes()
+        public void ObtenerTodosLosUsuarios()
         {
             //Preparacion
             var nombreDB = Guid.NewGuid().ToString();
             var contexto = ConstruirContext(nombreDB);
 
-            contexto.Hospedaje.Add(new Hospedaje() { titulo = "PruebaTest 1" });
-            contexto.Hospedaje.Add(new Hospedaje() { titulo = "PruebaTest 2" });
+            contexto.User.Add(new User() { nombre = "Nombre 1" });
+            contexto.User.Add(new User() { nombre = "Nombre 2" });
             contexto.SaveChanges();
 
             var contexto2 = ConstruirContext(nombreDB);
 
             //Prueba
-            var controller = new HospedajeController(contexto2);
+            var controller = new UserController(contexto2);
             var res = controller.Get();
             //Verifiacacion
             Console.WriteLine(res);
             Assert.AreEqual(2, res.Count());
         }
         [TestMethod]
-        public void ObtenerHospedajePorIdNoExistente()
+        public void ObtenerUsuarioPorIdNoExistente()
         {
             //Preparacion
             var nombreDB = Guid.NewGuid().ToString();
             var contexto = ConstruirContext(nombreDB);
 
-            var controller = new HospedajeController(contexto);
+            var controller = new UserController(contexto);
             var res = controller.Get(1);
             Assert.AreEqual(null, res);
         }
         [TestMethod]
-        public void ObtenerHospedajePorIdExistente()
+        public void ObtenerUsuarioPorIdExistente()
         {
             //Preparacion
             var nombreDB = Guid.NewGuid().ToString();
             var contexto = ConstruirContext(nombreDB);
 
-            contexto.Hospedaje.Add(new Hospedaje() { titulo = "PruebaTest 1" });
-            contexto.Hospedaje.Add(new Hospedaje() { titulo = "PruebaTest 2" });
+            contexto.User.Add(new User() { nombre = "Nombre 1" });
+            contexto.User.Add(new User() { nombre = "Nombre 2" });
             contexto.SaveChanges();
             var contexto2 = ConstruirContext(nombreDB);
 
-            var controller = new HospedajeController(contexto2);
+            var controller = new UserController(contexto2);
             var res = controller.Get(1);
 
             Assert.AreEqual(1, res.id);
         }
         [TestMethod]
-        public void CrearHospedaje()
+        public void CrearUsuario()
         {
             //Preparacion
             var nombreDB = Guid.NewGuid().ToString();
             var contexto = ConstruirContext(nombreDB);
 
-            var nuevoHops = new Hospedaje() { titulo = "Nuevo hospedaje" };
+            var nuevoUser = new User() { nombre = "Nuevo usuario",
+            cedula=1, clave="123", correo="pruebas@correo.com" };
 
-            var controller = new HospedajeController(contexto);
+            var controller = new UserController(contexto);
 
-            controller.Post(nuevoHops);
+            controller.Post(nuevoUser);
 
             var contexto2 = ConstruirContext(nombreDB);
-            var cantidad = contexto2.Hospedaje.Count();
+            var cantidad = contexto2.User.Count();
             Assert.AreEqual(1, cantidad);
         }
         //[TestMethod]
-        //public void ActualizarHospedaje()
+        //public void ActualizarUsuario()
         //{
         //    //Preparacion
         //    var nombreDB = Guid.NewGuid().ToString();
         //    var contexto = ConstruirContext(nombreDB);
 
-        //    contexto.Hospedaje.Add(new Hospedaje() { titulo = "Hospedaje 1" });
+        //    contexto.User.Add(new User() { id=1, nombre = "Usuario 1" });
         //    contexto.SaveChanges();
 
         //    var contexto2 = ConstruirContext(nombreDB);
-        //    var controller = new HospedajeController(contexto2);
+        //    var controller = new UserController(contexto2);
 
-        //    var hosp = new Hospedaje() { titulo = "Nuevo hospedaje" };
+        //    var nuevoUser = new User() { nombre = "Nuevo usuario" };
 
-        //    controller.Put(1,hosp);
-
+        //    controller.Put(1, nuevoUser);
         //    var context3 = ConstruirContext(nombreDB);
-        //    var existe = context3.Hospedaje.Any(x => x.titulo == "Nuevo hospedaje");
-        //    Assert.IsTrue(existe);
+        //    var existe = context3.User.Where(x => x.nombre == "Nuevo usuario").ToList();
+        //    Assert.AreEqual(1,existe.Count);
         //}
         [TestMethod]
-        public void BorrarHospedajeNoExistente()
+        public void BorrarUserNoExistente()
         {
             //Preparacion
             var nombreDB = Guid.NewGuid().ToString();
             var contexto = ConstruirContext(nombreDB);
 
-            var controller = new HospedajeController(contexto);
+            var controller = new UserController(contexto);
 
             controller.Delete(1);
             var contexto2 = ConstruirContext(nombreDB);
-            var cantidad = contexto2.Hospedaje.Count();
+            var cantidad = contexto2.User.Count();
             Assert.AreEqual(0, cantidad);
         }
         [TestMethod]
-        public void BorrarHospedajeExistente()
+        public void BorrarUserExistente()
         {
             //Preparacion
             var nombreDB = Guid.NewGuid().ToString();
             var contexto = ConstruirContext(nombreDB);
 
-            contexto.Hospedaje.Add(new Hospedaje() { titulo = "PruebaTest 1" });
+            contexto.User.Add(new User() { nombre = "Nuevo user 1" });
             contexto.SaveChanges();
 
             var contexto2 = ConstruirContext(nombreDB);
-            var controller = new HospedajeController(contexto2);
+            var controller = new UserController(contexto2);
 
             controller.Delete(1);
             var contexto3 = ConstruirContext(nombreDB);
-            var cantidad = contexto3.Hospedaje.Count();
+            var cantidad = contexto3.User.Count();
             Assert.AreEqual(0, cantidad);
         }
-        [TestMethod]
-        public void BuscarHospedajeExistente()
-        {
-            //Preparacion
-            var nombreDB = Guid.NewGuid().ToString();
-            var contexto = ConstruirContext(nombreDB);
-
-            contexto.Hospedaje.Add(new Hospedaje() { ubicacion = "Madrid" });
-            contexto.SaveChanges();
-
-            var contexto2 = ConstruirContext(nombreDB);
-            var controller = new HospedajeController(contexto2);
-
-            var respuesta = controller.SearchByLocation("Madrid");
-
-            var res = respuesta as OkObjectResult;
-            Assert.AreEqual(200, res.StatusCode);
-        }
-
     }
 }
