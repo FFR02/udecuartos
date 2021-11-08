@@ -78,26 +78,26 @@ namespace UdeCuartosTest.PruebasUnitarias
             var cantidad = contexto2.User.Count();
             Assert.AreEqual(1, cantidad);
         }
-        //[TestMethod]
-        //public void ActualizarUsuario()
-        //{
-        //    //Preparacion
-        //    var nombreDB = Guid.NewGuid().ToString();
-        //    var contexto = ConstruirContext(nombreDB);
+        [TestMethod]
+        public void ActualizarUsuario()
+        {
+            //Preparacion
+            var nombreDB = Guid.NewGuid().ToString();
+            var contexto = ConstruirContext(nombreDB);
 
-        //    contexto.User.Add(new User() { id=1, nombre = "Usuario 1" });
-        //    contexto.SaveChanges();
+            contexto.User.Add(new User() { id = 1, nombre = "Usuario 1" });
+            contexto.SaveChanges();
 
-        //    var contexto2 = ConstruirContext(nombreDB);
-        //    var controller = new UserController(contexto2);
+            var contexto2 = ConstruirContext(nombreDB);
+            var controller = new UserController(contexto2);
 
-        //    var nuevoUser = new User() { nombre = "Nuevo usuario" };
+            var nuevoUser = new User() { id = 1, nombre = "Nuevo usuario" };
 
-        //    controller.Put(1, nuevoUser);
-        //    var context3 = ConstruirContext(nombreDB);
-        //    var existe = context3.User.Where(x => x.nombre == "Nuevo usuario").ToList();
-        //    Assert.AreEqual(1,existe.Count);
-        //}
+            controller.Put(1, nuevoUser);
+            var context3 = ConstruirContext(nombreDB);
+            var existe = context3.User.Any(x => x.nombre == "Nuevo usuario");
+            Assert.IsTrue(existe);
+        }
         [TestMethod]
         public void BorrarUserNoExistente()
         {

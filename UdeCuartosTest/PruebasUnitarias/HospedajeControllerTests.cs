@@ -77,27 +77,27 @@ namespace UdeCuartosTest.PruebasUnitarias
             var cantidad = contexto2.Hospedaje.Count();
             Assert.AreEqual(1, cantidad);
         }
-        //[TestMethod]
-        //public void ActualizarHospedaje()
-        //{
-        //    //Preparacion
-        //    var nombreDB = Guid.NewGuid().ToString();
-        //    var contexto = ConstruirContext(nombreDB);
+        [TestMethod]
+        public void ActualizarHospedaje()
+        {
+            //Preparacion
+            var nombreDB = Guid.NewGuid().ToString();
+            var contexto = ConstruirContext(nombreDB);
 
-        //    contexto.Hospedaje.Add(new Hospedaje() { titulo = "Hospedaje 1" });
-        //    contexto.SaveChanges();
+            contexto.Hospedaje.Add(new Hospedaje() { id=1, titulo = "Hospedaje 1" });
+            contexto.SaveChanges();
 
-        //    var contexto2 = ConstruirContext(nombreDB);
-        //    var controller = new HospedajeController(contexto2);
+            var contexto2 = ConstruirContext(nombreDB);
+            var controller = new HospedajeController(contexto2);
 
-        //    var hosp = new Hospedaje() { titulo = "Nuevo hospedaje" };
+            var hosp = new Hospedaje() { id=1, titulo = "Nuevo hospedaje", tipo="casa" };
 
-        //    controller.Put(1,hosp);
+            controller.Put(1, hosp);
 
-        //    var context3 = ConstruirContext(nombreDB);
-        //    var existe = context3.Hospedaje.Any(x => x.titulo == "Nuevo hospedaje");
-        //    Assert.IsTrue(existe);
-        //}
+            var context3 = ConstruirContext(nombreDB);
+            var existe = context3.Hospedaje.Where(x => x.titulo == "Nuevo hospedaje");
+            Assert.AreEqual(1, existe.Count());
+        }
         [TestMethod]
         public void BorrarHospedajeNoExistente()
         {
