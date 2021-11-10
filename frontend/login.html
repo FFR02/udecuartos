@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicia sesion</title>
+
+    <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Proza+Libre&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="row">
+        <div class="col-12 col-md-6 p-0">
+          <div class="d-flex px-5 mx-5 my-4 justify-content-between">
+            <a class="navbar-brand" href="./index.html">UdeCuartos</a>
+            <a
+              class="nav-link"
+              data-toggle="modal"
+              data-target="#languageModal"
+            >
+              <img src="./resource/globe.png" alt="globe" style="width: 25px" />
+            </a>
+          </div>
+          <div class="d-flex flex-column px-5 m-5">
+            <h1 class="text-center">{{ $t('bienvenido') }}</h1>
+            <h4 class="mt-4">{{ $t('ingresaCorreo') }}</h4>
+            <form @submit.prevent="login">
+              <div v-if="error" class="alert alert-danger" role="alert">
+                {{ $t('verificaInfo') }}
+              </div>
+              <div class="form-group mb-3">
+                <input
+                  id="correo"
+                  type="email"
+                  :placeholder="$t('correo')"
+                  class="form-control py-4 my-4"
+                  v-model="correo"
+                  required
+                />
+              </div>
+              <div class="form-group mb-3">
+                <input
+                  id="clave"
+                  type="password"
+                  :placeholder="$t('clave')"
+                  class="form-control py-4"
+                  v-model="clave"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                id="btnLog"
+                class="btn btn-dark btn-shadow btn-block p-2 my-4"
+              >
+                {{ $t('iniciarSesion') }}
+              </button>
+            </form>
+            <div
+              class="text-center d-flex justify-content-between mt-2 mx-auto"
+            >
+              <p>
+                {{ $t('noTienesCuenta') }} <a href="./signup.html">{{ $t('registrarse') }}</a>
+              </p>
+            </div>
+            <div
+              class="text-center d-flex justify-content-between mt-2 mx-auto"
+            >
+              <a href="#">{{ $t('recuperarClave') }}</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 d-none d-md-block p-0">
+          <div
+            class="
+              cover
+              p-5
+              d-flex
+              justify-content-end
+              align-items-start
+              flex-column
+            "
+          >
+            <h1>The largest community</h1>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Change language modal -->
+      <div
+        class="modal fade"
+        id="languageModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                {{ $t('seleccionaIdioma') }}
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <input
+                  type="radio"
+                  name="languages"
+                  id="es"
+                  class="hidebx"
+                  value="es"
+                />
+                <label for="es" class="lbl-radio">
+                  <div class="display-box">Español</div>
+                </label>
+
+                <input
+                  type="radio"
+                  name="languages"
+                  id="en"
+                  class="hidebx"
+                  value="en"
+                />
+                <label for="en" class="lbl-radio">
+                  <div class="display-box">English</div>
+                </label>
+
+                <input
+                  type="radio"
+                  name="languages"
+                  id="pt"
+                  class="hidebx"
+                  value="pt"
+                />
+                <label for="pt" class="lbl-radio">
+                  <div class="display-box">Português</div>
+                </label>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                {{ $t('cerrar') }}
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="changeLanguage"
+              >
+                {{ $t('guardar') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-i18n@8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./js/login.js"></script>
+  </body>
+</html>

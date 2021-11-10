@@ -5,61 +5,71 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Backend.Models;
+using backend.Context;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using backend.Helper;
 
 namespace backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : Controller
     {
-        private static User[] users = Enumerable.Range(1, 20).Select(index => new User
+        private readonly AppDbContext context;
+
+        public UserController(AppDbContext context)
         {
-            Id = index,
-            Nombre = "Usuario " + index,
-            Cedula = "Cedula" + index,
-            Ubicacion = "Facatativa"
-        }).ToArray();
+            this.context = context;
+        }
+        //private static User[] users = Enumerable.Range(1, 20).Select(index => new User
+        //{
+        //    Id = index,
+        //    Nombre = "Usuario " + index,
+        //    Cedula = "Cedula" + index,
+        //    Ubicacion = "Facatativa"
+        //}).ToArray();
 
         // GET: api/<InmuebleController>
         [HttpGet]
         public IEnumerable<User> Get()
         {
-            return users;
+            return context.User.ToList();
         }
 
         // GET api/<InmuebleController>/5
         [HttpGet("{id}")]
         public User Get(int id)
         {
-            for (int i = 0; i < users.Length; i++)
-            {
-                if (users[i].Id == id)
-                {
-                    return users[i];
-                }
-            }
-
-            return null;
+            var x = context.User.FirstOrDefault(p => p.id == id);
+            return x;
         }
 
+
+        //Crea el usuario con la clave hash
         // POST api/<InmuebleController>
+        [AllowAnonymous]
         [HttpPost]
         public void Post([FromBody] User user)
         {
-            //Solo para ver el numero. Error al eliminar
-            user.Id = users.Count() + 1;
-            users = users.Append(user).ToArray();
+            var hash = HashHelper.Hash(user.clave);
+            user.clave = hash.Password;
+            user.sal = hash.Salt;
+            context.User.Add(user);
+            context.SaveChanges();
         }
 
         // PUT api/<InmuebleController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] User user)
         {
-            int indexAEditar = users.ToList().FindIndex(n => n.Id == id);
+            if (user.id == id)
+            {
+                context.Entry(user).State = EntityState.Modified;
+                context.SaveChanges();
 
-            users[indexAEditar].Nombre = user.Nombre;
-            users[indexAEditar].Cedula = user.Cedula;
-            users[indexAEditar].Ubicacion = user.Ubicacion;
+            }
 
         }
 
@@ -67,8 +77,12 @@ namespace backend.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            int indexABorrar = users.ToList().FindIndex(n => n.Id == id);
-            users = users.Where((source, index) => index != indexABorrar).ToArray();
+            var usuario = context.User.FirstOrDefault(x => x.id == id);
+            if (usuario != null)
+            {
+                context.User.Remove(usuario);
+                context.SaveChanges();
+            }
         }
     }
 }
