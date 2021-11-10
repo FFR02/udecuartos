@@ -26,21 +26,28 @@
     <div id="app">
       <div class="row">
         <div class="col-12 col-md-6 p-0">
-          <div class="px-5 mx-5 my-4">
+          <div class="d-flex px-5 mx-5 my-4 justify-content-between">
             <a class="navbar-brand" href="./index.html">UdeCuartos</a>
+            <a
+              class="nav-link"
+              data-toggle="modal"
+              data-target="#languageModal"
+            >
+              <img src="./resource/globe.png" alt="globe" style="width: 25px" />
+            </a>
           </div>
           <div class="d-flex flex-column px-5 m-5">
-            <h1 class="text-center">¡Bienvenido!</h1>
-            <h4 class="mt-4">Ingresa con tu correo electronico</h4>
+            <h1 class="text-center">{{ $t('bienvenido') }}</h1>
+            <h4 class="mt-4">{{ $t('ingresaCorreo') }}</h4>
             <form @submit.prevent="login">
               <div v-if="error" class="alert alert-danger" role="alert">
-                ¡Verifica tu información!
+                {{ $t('verificaInfo') }}
               </div>
               <div class="form-group mb-3">
                 <input
                   id="correo"
                   type="email"
-                  placeholder="Correo electronico"
+                  :placeholder="$t('correo')"
                   class="form-control py-4 my-4"
                   v-model="correo"
                   required
@@ -50,7 +57,7 @@
                 <input
                   id="clave"
                   type="password"
-                  placeholder="Contraseña"
+                  :placeholder="$t('clave')"
                   class="form-control py-4"
                   v-model="clave"
                   required
@@ -61,20 +68,20 @@
                 id="btnLog"
                 class="btn btn-dark btn-shadow btn-block p-2 my-4"
               >
-                Inicia sesion
+                {{ $t('iniciarSesion') }}
               </button>
             </form>
             <div
               class="text-center d-flex justify-content-between mt-2 mx-auto"
             >
               <p>
-                No tienes una cuenta? <a href="./signup.html">Registrate</a>
+                {{ $t('noTienesCuenta') }} <a href="./signup.html">{{ $t('registrarse') }}</a>
               </p>
             </div>
             <div
               class="text-center d-flex justify-content-between mt-2 mx-auto"
             >
-              <a href="#">¿Olvidate tú contraseña?</a>
+              <a href="#">{{ $t('recuperarClave') }}</a>
             </div>
           </div>
         </div>
@@ -94,9 +101,89 @@
           </div>
         </div>
       </div>
+
+      <!-- Change language modal -->
+      <div
+        class="modal fade"
+        id="languageModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                {{ $t('seleccionaIdioma') }}
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <input
+                  type="radio"
+                  name="languages"
+                  id="es"
+                  class="hidebx"
+                  value="es"
+                />
+                <label for="es" class="lbl-radio">
+                  <div class="display-box">Español</div>
+                </label>
+
+                <input
+                  type="radio"
+                  name="languages"
+                  id="en"
+                  class="hidebx"
+                  value="en"
+                />
+                <label for="en" class="lbl-radio">
+                  <div class="display-box">English</div>
+                </label>
+
+                <input
+                  type="radio"
+                  name="languages"
+                  id="pt"
+                  class="hidebx"
+                  value="pt"
+                />
+                <label for="pt" class="lbl-radio">
+                  <div class="display-box">Português</div>
+                </label>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                {{ $t('cerrar') }}
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="changeLanguage"
+              >
+                {{ $t('guardar') }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-i18n@8"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

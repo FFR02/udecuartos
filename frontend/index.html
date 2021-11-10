@@ -90,12 +90,13 @@
                   class="dropdown-menu dropdown-menu-right"
                   aria-labelledby="navbarDropdownMenuLink"
                 >
-                  <a class="dropdown-item" href="#">Ver mi perfil</a>
+                  <a class="dropdown-item" href="#">{{ $t('verPerfil') }}</a>
                   <a class="dropdown-item" href="./MisHospedajes.html"
-                    >Mis hospedajes</a
+                    >{{ $t('misHospedajes') }}</a
                   >
+                  <a class="dropdown-item" href="./todos.html">{{ $t('explorar') }}</a>
                   <a class="dropdown-item" href="#" @click="cerrarSesion"
-                    >Cerrar sesion</a
+                    >{{ $t('cerrarSesion') }}</a
                   >
                 </div>
               </li>
@@ -265,7 +266,7 @@
 
     <script>
       const i18n = new VueI18n({
-        locale: localStorage.getItem("lang"),
+        locale: localStorage.getItem("lang") || "es",
         messages: {
           es: {
             inicio: "Inicio",
@@ -279,6 +280,9 @@
             seleccionaIdioma: "Selecciona un idioma",
             guardar: "Guardar",
             cerrar: "Cerrar",
+            verPerfil: 'Ver mi perfil',
+            explorar: 'Descubre',
+            misHospedajes: 'Mis hospedajes',
             cerrarSesion: "Cerrar Sesion",
           },
           en: {
@@ -293,6 +297,9 @@
             seleccionaIdioma: "Choose a language",
             guardar: "Save",
             cerrar: "Close",
+            verPerfil: 'See my profile',
+            explorar: 'Discover',
+            misHospedajes: 'My lodgings',
             cerrarSesion: "Log out",
           },
           pt: {
@@ -307,6 +314,9 @@
             seleccionaIdioma: "Escolha um idioma",
             guardar: "Salve",
             cerrar: "Fechar",
+            verPerfil: 'Veja meu perfil',
+            explorar: 'Descobrir',
+            misHospedajes: 'Meus alojamentos',
             cerrarSesion: "Sair",
           },
         },

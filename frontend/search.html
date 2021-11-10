@@ -22,7 +22,7 @@
   </head>
   <body>
     <div id="app">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top px-5">
         <a class="navbar-brand" href="./index.html">UdeCuartos</a>
         <button
           class="navbar-toggler"
@@ -40,21 +40,34 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
               <a class="nav-link" href="#"
-                >Inicio <span class="sr-only">(current)</span></a
+                >{{ $t('inicio') }}<span class="sr-only">(current)</span></a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Ayuda</a>
+              <a class="nav-link" href="#">{{ $t('ayuda') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Acerca de</a>
+              <a class="nav-link" href="#">{{ $t('acercaDe') }}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">¡Vuelvete arrendatario!</a>
+              <a class="nav-link" href="#">{{ $t('vuelveteArrendador') }}</a>
             </li>
           </ul>
           <div class="form-inline" v-if="logged">
             <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-toggle="modal"
+                  data-target="#languageModal"
+                >
+                  <img
+                    src="./resource/globe.png"
+                    alt="globe"
+                    style="width: 25px"
+                  />
+                </a>
+              </li>
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle"
@@ -75,23 +88,43 @@
                   class="dropdown-menu dropdown-menu-right"
                   aria-labelledby="navbarDropdownMenuLink"
                 >
-                  <a class="dropdown-item" href="#">Ver mi perfil</a>
-                  <a class="dropdown-item" href="./MisHospedajes.html">Mis hospedajes</a>
-                  <a class="dropdown-item" href="#" @click="cerrarSesion">Cerrar sesion</a>
+                  <a class="dropdown-item" href="#">{{ $t('verPerfil') }}</a>
+                  <a class="dropdown-item" href="./MisHospedajes.html">{{ $t('misHospedajes') }}</a>
+                  <a class="dropdown-item" href="./todos.html">{{ $t('explorar') }}</a>
+                  <a class="dropdown-item" href="#" @click="cerrarSesion">{{ $t('cerrarSesion') }}</a>
                 </div>
               </li>
             </ul>
           </div>
           <form class="form-inline my-2 my-lg-0" v-else>
-            <a
-              class="btn btn-outline-dark my-2 my-sm-0 mr-3"
-              href="./login.html"
-            >
-              Iniciar sesion
-            </a>
-            <a class="btn btn-dark my-2 my-sm-0" href="./signup.html">
-              Registrarse
-            </a>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-toggle="modal"
+                  data-target="#languageModal"
+                >
+                  <img
+                    src="./resource/globe.png"
+                    alt="globe"
+                    style="width: 25px"
+                  />
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="btn btn-outline-dark mx-auto mx-lg-2 mb-2 mb-lg-0"
+                  href="./login.html"
+                >
+                  {{ $t('iniciarSesion') }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="btn btn-dark" href="./signup.html">
+                  {{ $t('registrarse') }}
+                </a>
+              </li>
+            </ul>
           </form>
         </div>
       </nav>
@@ -114,12 +147,13 @@
               <input
               type="text"
               class="form-control"
-              @keyup.enter="stringSearch"
+              @keyup.enter="search"
               v-model="stringSearch"
+              :placeholder="$t('agregaUbicacion')"
               />
               <div class="input-group-append">
                 <button class="btn btn-dark" type="submit">
-                  Buscar
+                  {{ $t('buscar') }}
                 </button>
               </div>
             </div>
@@ -128,9 +162,13 @@
           </div>
         </section>
 
-        <section class="container">
+        <section class="container mt-3">
+          <div class="alert alert-info text-center" role="alert" v-if="error">
+            <h4>No se han encontrado resultados.</h4>
+            <p class="mb-0">Asegurate de que la ubicacion este escrita correctamente o prueba con otros lugares.</p>
+          </div>
           <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3">
-              <div class="col" v-for="hospedaje in hospedajes" v-bind="hospedaje.id">
+              <div class="col" v-for="hospedaje in hospedajes" v-bind:key="hospedaje.id">
                 <div class="card" style="width: 18rem;">
                   <img v-bind:src="hospedaje.imagen" class="card-img-top" alt="...">
                   <div class="card-body">
@@ -139,15 +177,134 @@
                     <div>
                       <span class="badge badge-info">{{ hospedaje.precio }}</span>
                     </div>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <button @click="verModal(hospedaje.id)" class="btn btn-primary">{{ $t('verMas') }}</button>
                   </div>
               </div>
           </div>
         </section>
+
+        <!-- modal -->
+        <div class="modal fade" id="modalID" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content" style="width: 1000px;">
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                            {{ currentHosp.tipo }} en {{currentHosp.ubicacion}}
+                        </h4>
+                        <button type="button " class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <img v-bind:src="currentHosp.imagen" alt="" width="100%" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="card rounded" style="height:100%;">
+                                        <div class="card-body ">
+                                            <h5 class="card-title">{{ currentHosp.titulo }}</h5>
+                                            <p class="card-text">${{ currentHosp.precio }}</p>
+                                            <p class="card-text">{{ currentHosp.tipo }}</p>
+                                            <p class="card-text">{{ currentHosp.ubicacion }}, {{
+                                                currentHosp.direccion }}</p>
+                                            <button type="button" name="button" class="btn btn-primary"
+                                                @click="verModal(hospedaje.id)">Comprar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Change language modal -->
+        <div
+          class="modal fade"
+          id="languageModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div
+            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+          >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                {{ $t('seleccionaIdioma') }}
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <input
+                    type="radio"
+                    name="languages"
+                    id="es"
+                    class="hidebx"
+                    value="es"
+                  />
+                  <label for="es" class="lbl-radio">
+                    <div class="display-box">Español</div>
+                  </label>
+
+                  <input
+                    type="radio"
+                    name="languages"
+                    id="en"
+                    class="hidebx"
+                    value="en"
+                  />
+                  <label for="en" class="lbl-radio">
+                    <div class="display-box">English</div>
+                  </label>
+
+                  <input
+                    type="radio"
+                    name="languages"
+                    id="pt"
+                    class="hidebx"
+                    value="pt"
+                  />
+                  <label for="pt" class="lbl-radio">
+                    <div class="display-box">Português</div>
+                  </label>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  {{ $t('cerrar') }}
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  @click="changeLanguage"
+                >
+                  {{ $t('guardar') }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-i18n@8"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

@@ -49,6 +49,7 @@ namespace backend.Controllers
         }
 
         // GET api/<HospedajeController>/5
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public Hospedaje Get(int id)
         {

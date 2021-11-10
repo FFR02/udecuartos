@@ -14,79 +14,58 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top px-5">
             <a class="navbar-brand" href="./index.html">UdeCuartos</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="./index.html"
-                        >Inicio <span class="sr-only">(current)</span></a
-                      >
+                        <a class="nav-link" href="./index.html">{{ $t('inicio') }} <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Ayuda</a>
+                        <a class="nav-link" href="#">{{ $t('ayuda') }}</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Acerca de</a>
+                        <a class="nav-link" href="#">{{ $t('acercaDe') }}</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">¡Vuelvete arrendatario!</a>
+                        <a class="nav-link" href="#">{{ $t('vuelveteArrendador') }}</a>
                     </li>
-                  </ul>
+                </ul>
                 <div class="form-inline" v-if="logged">
                     <ul class="navbar-nav mr-auto">
-                      <li class="nav-item dropdown">
-                        <a
-                          class="nav-link dropdown-toggle"
-                          href="#"
-                          id="navbarDropdownMenuLink"
-                          role="button"
-                          data-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <img
-                            src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
-                            class="rounded-circle"
-                            alt="..."
-                            style="width: 30px"
-                          />
-                        </a>
-                        <div
-                          class="dropdown-menu dropdown-menu-right"
-                          aria-labelledby="navbarDropdownMenuLink"
-                        >
-                          <a class="dropdown-item" href="#">Ver mi perfil</a>
-                          <a class="dropdown-item" href="./MisHospedajes.html">Mis hospedajes</a>
-                          <a class="dropdown-item" href="#" @click="cerrarSesion"
-                            >Cerrar sesion</a
-                          >
-                        </div>
-                      </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="modal" data-target="#languageModal">
+                                <img src="./resource/globe.png" alt="globe" style="width: 25px" />
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                <img src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png"
+                                    class="rounded-circle" alt="..." style="width: 30px" />
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">{{ $t('verPerfil') }}</a>
+                                <a class="dropdown-item" href="./MisHospedajes.html">{{ $t('misHospedajes') }}</a>
+                                <a class="dropdown-item" href="./todos.html">{{ $t('explorar') }}</a>
+                                <a class="dropdown-item" href="#" @click="cerrarSesion">{{ $t('cerrarSesion') }}</a>
+                            </div>
+                        </li>
                     </ul>
-                  </div>
-                  <form class="form-inline my-2 my-lg-0" v-else>
-                    <a
-                      class="btn btn-outline-dark my-2 my-sm-0 mr-3"
-                      href="./login.html"
-                    >
-                      Iniciar sesion
+                </div>
+                <form class="form-inline my-2 my-lg-0" v-else>
+                    <a class="btn btn-outline-dark my-2 my-sm-0 mr-3" href="./login.html">
+                        {{ $t('iniciarSesion') }}
                     </a>
                     <a class="btn btn-dark my-2 my-sm-0" href="./signup.html">
-                      Registrarse
+                        {{ $t('registrarse') }}
                     </a>
-                  </form>
+                </form>
             </div>
         </nav>
 
@@ -94,11 +73,11 @@
             <section class="container">
                 <div class="form-group">
                     <div v-if="error" class="alert alert-danger" role="alert">
-                        Aun no tienes nada, publica tu habitacion para verla
+                        {{ $t('error') }}
                     </div>
                     </button>
                     <button class="btn btn-dark my-2 my-sm-0" type="submit" @click=modalView>
-                        Registra tu habitacion
+                        {{ $t('registraHabitacion') }}
                     </button>
                 </div>
                 <div class="row row-cols-1 row-cols-md-3 row-cols-lg-3">
@@ -112,7 +91,7 @@
                                     <span class="badge badge-info">{{ hospedaje.ubicacion }}</span>
                                 </div>
                                 <button type="button" name="button" class="btn btn-primary"
-                                    @click="verModal(hospedaje.id)">Ver mas</button>
+                                    @click="verModal(hospedaje.id)">{{ $t('verMas') }}</button>
                             </div>
                         </div>
                     </div>
@@ -123,7 +102,7 @@
                     <div class="modal-content" style="width: 1000px;">
                         <div class="modal-header">
                             <h4 class="modal-title">
-                                Registra tu habiracion
+                                {{ $t('registraHabitacion') }}
                             </h4>
                             <button type="button " class="close" data-dismiss="modal"
                                 aria-hidden="true">&times;</button>
@@ -131,16 +110,16 @@
                         <div class="modal-body">
                             <form>
                                 <div class="form-group">
-                                    <h5 class="card-text" for="titulo">Titulo</h5>
-                                    <input type="text" class="form-control" id="titulo" required/>
-                                    <h5 class="card-text" for="titulo">Tipo de vivienda</h5>
-                                    <input type="text" class="form-control" id="tipoHospedaje" required/>
-                                    <h5 class="card-text" for="titulo">Direccion</h5>
-                                    <input type="text" class="form-control" id="direccion" required/>
-                                    <h5 class="card-text" for="ubicacion">Ubicacion</h5>
-                                    <input type="text" class="form-control" id="ubicacion" required/>
-                                    <h5 class="card-text" for="precio">Precio</h5>
-                                    <input type="number" class="form-control" id="precio" required/>
+                                    <h5 class="card-text" for="titulo">{{ $t('titulo') }}</h5>
+                                    <input type="text" class="form-control" id="titulo" required />
+                                    <h5 class="card-text" for="titulo">{{ $t('tipoVivienda') }}</h5>
+                                    <input type="text" class="form-control" id="tipoHospedaje" required />
+                                    <h5 class="card-text" for="titulo">{{ $t('direccion') }}</h5>
+                                    <input type="text" class="form-control" id="direccion" required />
+                                    <h5 class="card-text" for="ubicacion">{{ $t('ubicacion') }}</h5>
+                                    <input type="text" class="form-control" id="ubicacion" required />
+                                    <h5 class="card-text" for="precio">{{ $t('precio') }}</h5>
+                                    <input type="number" class="form-control" id="precio" required />
                                 </div>
                                 <!-- <fieldset class="form-group row">
                                     <legend class="col-form-label col-sm-2 float-sm-left pt-0">Servicios:</legend>
@@ -163,16 +142,16 @@
                                 </fieldset> -->
                                 <!-- Imagen -->
                                 <div class="form-group">
-                                    <h5 class="card-text" for="imagenes">Foto</h5>
-                                    <input type="file" id="img-upload"/>
+                                    <h5 class="card-text" for="imagenes">{{ $t('foto') }}</h5>
+                                    <input type="file" id="img-upload" />
                                 </div>
-                                
+
                             </form>
                             <div class="col text-center">
                                 <button type="submit" name="button" class="btn btn-primary btn-lg"
-                                id="btnRegistrar">Registrar</button>
-                              </div>
-                            
+                                    id="btnRegistrar">{{ $t('guardar') }}</button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -203,7 +182,7 @@
                                                 <p class="card-text">{{ currentHosp.ubicacion }}, {{
                                                     currentHosp.direccion }}</p>
                                                 <button type="button" name="button" class="btn btn-primary"
-                                                    @click="eliminar(currentHosp.id)">Eliminar</button>
+                                                    @click="eliminar(currentHosp.id)">{{ $t('eliminar') }}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -213,10 +192,53 @@
                     </div>
                 </div>
             </div>
+            <!-- Change language modal -->
+            <div class="modal fade" id="languageModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                {{ $t('seleccionaIdioma') }}
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <input type="radio" name="languages" id="es" class="hidebx" value="es" />
+                                <label for="es" class="lbl-radio">
+                                    <div class="display-box">Español</div>
+                                </label>
+
+                                <input type="radio" name="languages" id="en" class="hidebx" value="en" />
+                                <label for="en" class="lbl-radio">
+                                    <div class="display-box">English</div>
+                                </label>
+
+                                <input type="radio" name="languages" id="pt" class="hidebx" value="pt" />
+                                <label for="pt" class="lbl-radio">
+                                    <div class="display-box">Português</div>
+                                </label>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                {{ $t('cerrar') }}
+                            </button>
+                            <button type="button" class="btn btn-primary" @click="changeLanguage">
+                                {{ $t('guardar') }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-i18n@8"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
