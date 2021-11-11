@@ -100,7 +100,8 @@ const app = new Vue({
             var docNumber = Number(this.cedula)
             axios({
                 method: 'post',
-                url: 'https://localhost:44389/api/user',
+                // url: 'https://localhost:44389/api/user',
+                url: 'https://udecuartos-backend.azurewebsites.net/api/user',
                 data: {
                     'nombre': this.nombreCompleto,
                     'cedula': docNumber,

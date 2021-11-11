@@ -70,7 +70,8 @@ const app = new Vue({
         login() {
             axios({
                 method: 'post',
-                url: 'https://localhost:44389/api/login',
+                // url: 'https://localhost:44389/api/login',
+                url: 'https://udecuartos-backend.azurewebsites.net/api/login',
                 data: {
                     'correo': this.correo,
                     'clave': this.clave

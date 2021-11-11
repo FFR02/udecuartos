@@ -112,7 +112,7 @@ const app = new Vue({
         fetch() {
             this.nombre = localStorage.getItem('user_id');
             let result = axios
-                .get("https://localhost:44389/api/mishospedajes/" + localStorage.getItem('user_id'), {
+                .get("https://udecuartos-backend.azurewebsites.net/api/mishospedajes/" + localStorage.getItem('user_id'), {
                     headers: { 'Authorization': 'Bearer ' + localStorage.getItem('user_token') }
                 })
                 .then((res) => {
@@ -132,7 +132,7 @@ const app = new Vue({
             this.fetchOne(id);
         },
         async fetchOne(id) {
-            let url = "https://localhost:44389/api/hospedaje/" + id;
+            let url = "https://udecuartos-backend.azurewebsites.net/api/hospedaje/" + id;
             let result = await axios.get(url, {
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('user_token') }
             });
@@ -143,7 +143,7 @@ const app = new Vue({
         eliminar(id) {
             axios({
                 method: 'delete',
-                url: 'https://localhost:44389/api/hospedaje/' + id,
+                url: 'https://udecuartos-backend.azurewebsites.net/api/hospedaje/' + id,
                 headers: { 'Authorization': 'Bearer ' + localStorage.getItem('user_token') }
             }).then(
                 (res) => {

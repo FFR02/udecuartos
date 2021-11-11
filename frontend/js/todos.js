@@ -90,7 +90,7 @@ const app = new Vue({
         fetch() {
             this.nombre = localStorage.getItem('user_id')
             let result = axios
-                .get("https://localhost:44389/api/hospedaje",{
+                .get("https://udecuartos-backend.azurewebsites.net/api/hospedaje",{
                     headers: {'Authorization': 'Bearer '+ localStorage.getItem('user_token')}
                 })
                 .then((res) => {
@@ -107,7 +107,7 @@ const app = new Vue({
             this.fetchOne(id);
         },
         async fetchOne(id) {
-            let url = "https://localhost:44389/api/hospedaje/" + id;
+            let url = "https://udecuartos-backend.azurewebsites.net/api/hospedaje/" + id;
             let result = await axios.get(url, {
                 headers: {'Authorization': 'Bearer '+ localStorage.getItem('user_token')}
             });
